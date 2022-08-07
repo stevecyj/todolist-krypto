@@ -69,7 +69,7 @@ $(() => {
 
   // 每條待辦事項加上 class completed, no-completed
   // 步驟一：監聽每一個 todo list，前面 checkbox 有被點擊時執行 Function
-  $('.todolist__item li').on('click', 'input', (e) => {
+  $('.todolist__table').on("click", "input", function (e) {
     const li = $(e.target).parent()
 
     // 步驟二：每條待辦事項根據條件，加上不同的 class：completed, no-complete
