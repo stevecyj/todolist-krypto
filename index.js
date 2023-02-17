@@ -1,6 +1,22 @@
 // TODO: 使用者可以新增待辦事項
 const addNewTodo = () => {
+    console.log('add new todo')
+    // 1) 取得輸入的值
+    const value = $('#todo').val()
 
+    // 2) 新增值到待辦事項
+    $('.todolist__item').append(`
+    <li class="no-completed">
+        <input class="todolist__input" type="checkbox">
+        <span>${value}</span>
+        <a class="delete" href="#">
+          <i class="fa fa-x" aria-hidden="true"></i>
+        </a>
+    </li>
+    `)
+
+    //3 ) 清空 input
+    $('#todo').val('')
 }
 
 // 更新已完成項目
