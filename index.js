@@ -28,6 +28,8 @@ const updateCompletedCount = () => {
 
 // TODO: 使用者可以刪除待辦事項
 const deleteTodo = (e) => {
+  console.log($(e.target).parent().closest('li'))
+  $(e.target).parent().closest('li').remove()
 }
 
 // TODO: 清除已完成項目
