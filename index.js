@@ -7,11 +7,18 @@ const addNewTodo = () => {
   // 2) 新增值到待辦事項
   $('.todolist__item').append(`
     <li class="no-completed">
+        <div style="display: flex;">
         <input class="todolist__input" type="checkbox">
         <span>${value}</span>
+        </div>
+        <div>
         <a class="delete" href="#">
           <i class="fa fa-x" aria-hidden="true"></i>
         </a>
+        <a class="" href="#">
+          <i class="fa fa-x" aria-hidden="true"></i>
+        </a>
+        </div>
     </li>
     `);
 
@@ -34,10 +41,10 @@ const deleteTodo = (e) => {
 
 // TODO: 使用者可以編輯待辦事項
 const editTodo = (e) => {
-  console.log($(e.target).children('span').text());
-  let taskText = $(e.target).children('span').text();
-  let newTaskText = prompt('編輯', taskText);
-  $(e.target).children('span').text(newTaskText);
+  console.log($(e.target));
+  // let taskText = $(e.target).children('span').text();
+  // let newTaskText = prompt('編輯', taskText);
+  // $(e.target).children('span').text(newTaskText);
 };
 
 // TODO: 清除已完成項目
@@ -74,7 +81,7 @@ $(() => {
   });
 
   // TODO: 編輯
-  $('.todolist__item').on('click', 'li', (e) => editTodo(e));
+  $('.todolist__item li').on('click', 'input', (e) => editTodo(e));
 
   // TODO: 篩選待完成
 
