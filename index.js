@@ -9,13 +9,15 @@ const addNewTodo = () => {
 
   //3 ) 清空 input
   $('#todo').val('');
+
+  keepTodos();
 };
 
 // 新增待辦
 const appendList = (value) => {
   $('.todolist__item').append(`
     <li class="no-completed">
-        <div style="display: flex;">
+        <div class="todo_item" style="display: flex;">
           <input class="todolist__input" type="checkbox">
           <span>${value}</span>
         </div>
@@ -109,3 +111,20 @@ $(() => {
 
   // TODO: 篩選已完成
 });
+
+// to localStorage
+function keepTodos() {
+  let todos = [];
+  $('.todolist__item li').each(function () {
+    const todoText = $(this)
+      .children('.todo_item')
+      .children('span')
+      .text()
+      .trim();
+    const completedItem = $(this).hasClass('completed');
+
+    todos.push({ todoItem: todoText, completed: completedItem });
+  });
+  console.log(todos);
+  localStorage.setItem('todos', JSON.stringify(todos));
+}
