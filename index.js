@@ -8,16 +8,16 @@ const addNewTodo = () => {
   $('.todolist__item').append(`
     <li class="no-completed">
         <div style="display: flex;">
-        <input class="todolist__input" type="checkbox">
-        <span>${value}</span>
+          <input class="todolist__input" type="checkbox">
+          <span>${value}</span>
         </div>
         <div>
-        <a class="delete" href="#">
-          <i class="fa fa-x" aria-hidden="true"></i>
-        </a>
-        <a class="" href="#">
-          <i class="fa fa-x" aria-hidden="true"></i>
-        </a>
+          <a class="edit" href="#">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </a>
+          <a class="delete" href="#">
+            <i class="fa fa-x" aria-hidden="true"></i>
+          </a>
         </div>
     </li>
     `);
@@ -41,9 +41,18 @@ const deleteTodo = (e) => {
 
 // TODO: 使用者可以編輯待辦事項
 const editTodo = (e) => {
-  console.log($(e.target));
-  // let taskText = $(e.target).children('span').text();
-  // let newTaskText = prompt('編輯', taskText);
+  console.log(
+    $(e.target).parent().closest('li').children().find('span').text()
+  );
+  let taskText = $(e.target)
+    .parent()
+    .closest('li')
+    .children()
+    .find('span')
+    .text();
+
+  let newTaskText = prompt('編輯', taskText);
+  $(e.target).parent().closest('li').children().find('span').text(newTaskText);
   // $(e.target).children('span').text(newTaskText);
 };
 
@@ -81,7 +90,7 @@ $(() => {
   });
 
   // TODO: 編輯
-  $('.todolist__item li').on('click', 'input', (e) => editTodo(e));
+  $('.todolist__item').on('click', '.edit', (e) => editTodo(e));
 
   // TODO: 篩選待完成
 
