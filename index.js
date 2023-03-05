@@ -62,6 +62,16 @@ const clearCompletedTodo = () => {
 
 // 監聽
 $(() => {
+  // init from localStorage
+  let todos = localStorage.getItem('todos');
+  if (todos) {
+    todoItems = JSON.parse(todos);
+    console.log(todoItems);
+    todoItems.forEach(function (todoItem) {
+      appendList(todoItem.todoItem, todoItem.completed);
+    });
+  }
+
   // TODO: 每一條代辦事項 delete 監聽 click 事件
   $('.todolist__item').on('click', '.delete', (e) => deleteTodo(e));
 
@@ -95,9 +105,9 @@ $(() => {
 });
 
 // 新增待辦
-const appendList = (value) => {
+const appendList = (value, isCompleted) => {
   $('.todolist__item').append(`
-    <li class="no-completed">
+    <li class=${isCompleted ? 'completed' : 'no-completed'}>
         <div class="todo_item" style="display: flex;">
           <input class="todolist__input" type="checkbox">
           <span>${value}</span>
