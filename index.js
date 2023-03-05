@@ -2,9 +2,17 @@
 const addNewTodo = () => {
   console.log('add new todo');
   // 1) 取得輸入的值
-  const value = $('#todo').val();
+  const value = $('#todo').val().trim();
+  value == '' ? alert('請輸入待辦事項') : appendList(value);
 
   // 2) 新增值到待辦事項
+
+  //3 ) 清空 input
+  $('#todo').val('');
+};
+
+// 新增待辦
+const appendList = (value) => {
   $('.todolist__item').append(`
     <li class="no-completed">
         <div style="display: flex;">
@@ -20,10 +28,7 @@ const addNewTodo = () => {
           </a>
         </div>
     </li>
-    `);
-
-  //3 ) 清空 input
-  $('#todo').val('');
+  `);
 };
 
 // 更新已完成項目
@@ -36,7 +41,7 @@ const updateCompletedCount = () => {
 // TODO: 使用者可以刪除待辦事項
 const deleteTodo = (e) => {
   console.log($(e.target).parent().closest('li'));
-  $(e.target).parent().closest('li').remove();
+  confirm('確認刪除？') ? $(e.target).parent().closest('li').remove() : false;
 };
 
 // TODO: 使用者可以編輯待辦事項
