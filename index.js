@@ -13,26 +13,6 @@ const addNewTodo = () => {
   keepTodos();
 };
 
-// 新增待辦
-const appendList = (value) => {
-  $('.todolist__item').append(`
-    <li class="no-completed">
-        <div class="todo_item" style="display: flex;">
-          <input class="todolist__input" type="checkbox">
-          <span>${value}</span>
-        </div>
-        <div>
-          <a class="edit" href="#">
-            <i class="fa fa-edit" aria-hidden="true"></i>
-          </a>
-          <a class="delete" href="#">
-            <i class="fa fa-x" aria-hidden="true"></i>
-          </a>
-        </div>
-    </li>
-  `);
-};
-
 // 更新已完成項目
 const updateCompletedCount = () => {
   const count = $('.todolist__item').find('.completed').length;
@@ -44,6 +24,8 @@ const updateCompletedCount = () => {
 const deleteTodo = (e) => {
   console.log($(e.target).parent().closest('li'));
   confirm('確認刪除？') ? $(e.target).parent().closest('li').remove() : false;
+
+  keepTodos();
 };
 
 // TODO: 使用者可以編輯待辦事項
@@ -111,6 +93,26 @@ $(() => {
 
   // TODO: 篩選已完成
 });
+
+// 新增待辦
+const appendList = (value) => {
+  $('.todolist__item').append(`
+    <li class="no-completed">
+        <div class="todo_item" style="display: flex;">
+          <input class="todolist__input" type="checkbox">
+          <span>${value}</span>
+        </div>
+        <div>
+          <a class="edit" href="#">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+          </a>
+          <a class="delete" href="#">
+            <i class="fa fa-x" aria-hidden="true"></i>
+          </a>
+        </div>
+    </li>
+  `);
+};
 
 // to localStorage
 function keepTodos() {
