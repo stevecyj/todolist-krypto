@@ -3,7 +3,7 @@ const addNewTodo = () => {
   console.log('add new todo');
   // 1) 取得輸入的值
   const value = $('#todo').val().trim();
-  value == '' ? alert('請輸入待辦事項') : appendList(value);
+  value == '' ? alert('請輸入待辦事項') : appendList(value, false);
 
   // 2) 新增值到待辦事項
 
@@ -25,6 +25,7 @@ const deleteTodo = (e) => {
   console.log($(e.target).parent().closest('li'));
   confirm('確認刪除？') ? $(e.target).parent().closest('li').remove() : false;
 
+  updateCompletedCount();
   keepTodos();
 };
 
@@ -41,7 +42,14 @@ const editTodo = (e) => {
     .text();
 
   let newTaskText = prompt('編輯', taskText);
-  $(e.target).parent().closest('li').children().find('span').text(newTaskText);
+  newTaskText == ''
+    ? alert('請輸入文字')
+    : $(e.target)
+        .parent()
+        .closest('li')
+        .children()
+        .find('span')
+        .text(newTaskText);
 };
 
 // TODO: 設定項目已完成
@@ -57,9 +65,13 @@ const completedTodo = (e) => {
 // TODO: 清除已完成項目
 const clearCompletedTodo = () => {
   // 找到 completed 的待辦事項，並移除 .completed class
+  $();
+  confirm('確認是否移除') ? $('.todolist__table .completed').remove() : false;
   // 更新已完成項目
   // 抓出 .todolist__item 待辦事項的 .completed class 數量
   // 用 jQuery text() 方式更新 html 已完成 [數字] 項目
+  updateCompletedCount();
+  keepTodos();
 };
 
 // 監聽
@@ -72,6 +84,7 @@ $(() => {
     todoItems.forEach(function (todoItem) {
       appendList(todoItem.todoItem, todoItem.completed);
     });
+    updateCompletedCount();
   }
 
   // TODO: 每一條代辦事項 delete 監聽 click 事件
@@ -91,6 +104,9 @@ $(() => {
     // 步驟二：每條待辦事項根據條件，加上不同的 class：completed, no-complete
     completedTodo(e);
     // 步驟三：更新已完成項目的數字
+
+    updateCompletedCount();
+    keepTodos();
   });
 
   // 篩選全部
@@ -112,7 +128,7 @@ const appendList = (value, isCompleted) => {
     <li class=${isCompleted ? 'completed' : 'no-completed'}>
         <div class="todo_item" style="display: flex;">
           <input class="todolist__input" type="checkbox" ${
-            isCompleted ? '' : 'checked'
+            isCompleted ? 'checked' : ''
           }>
           <span>${value}</span>
         </div>
