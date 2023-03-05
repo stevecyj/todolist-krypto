@@ -53,7 +53,14 @@ const editTodo = (e) => {
 
   let newTaskText = prompt('編輯', taskText);
   $(e.target).parent().closest('li').children().find('span').text(newTaskText);
-  // $(e.target).children('span').text(newTaskText);
+};
+
+// TODO: 設定項目已完成
+const completedTodo = (e) => {
+  let checkedItem = $(e.target).closest('li');
+  checkedItem.hasClass('completed')
+    ? checkedItem.addClass('no-completed').removeClass('completed')
+    : checkedItem.removeClass('no-completed').addClass('completed');
 };
 
 // TODO: 清除已完成項目
@@ -79,8 +86,9 @@ $(() => {
 
   // TODO: 使用者可以將待辦事項設定成已完成
   // 步驟一：監聽每一個 todo list，前面 checkbox 有被點擊時執行 Function
-  $('.todolist__item li').on('click', 'input', (e) => {
+  $('.todolist__item').on('click', 'li input', (e) => {
     // 步驟二：每條待辦事項根據條件，加上不同的 class：completed, no-complete
+    completedTodo(e);
     // 步驟三：更新已完成項目的數字
   });
 

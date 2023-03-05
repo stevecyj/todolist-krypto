@@ -130,6 +130,8 @@ input[type='checkbox'] {
 
 /* TODO:  設定 css 刪除效果 */
 .todolist__table .todolist__item input:checked + span {
+  text-decoration: line-through;
+  color: #aaa;
 }
 
 .todolist__info {
