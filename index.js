@@ -118,8 +118,16 @@ $(() => {
   $('.todolist__item').on('click', '.edit', (e) => editTodo(e));
 
   // TODO: 篩選待完成
+  $('.todolist__tabs').on('click', '.no-completed', (e) => {
+    $('.todolist__item .no-completed').show();
+    $('.todolist__item .completed').hide();
+  });
 
   // TODO: 篩選已完成
+  $('.todolist__tabs').on('click', '.completed', (e) => {
+    $('.todolist__item .no-completed').hide();
+    $('.todolist__item .completed').show();
+  });
 });
 
 // 新增待辦
