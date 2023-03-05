@@ -50,6 +50,8 @@ const completedTodo = (e) => {
   checkedItem.hasClass('completed')
     ? checkedItem.addClass('no-completed').removeClass('completed')
     : checkedItem.removeClass('no-completed').addClass('completed');
+
+  keepTodos();
 };
 
 // TODO: 清除已完成項目
@@ -109,7 +111,9 @@ const appendList = (value, isCompleted) => {
   $('.todolist__item').append(`
     <li class=${isCompleted ? 'completed' : 'no-completed'}>
         <div class="todo_item" style="display: flex;">
-          <input class="todolist__input" type="checkbox">
+          <input class="todolist__input" type="checkbox" ${
+            isCompleted ? '' : 'checked'
+          }>
           <span>${value}</span>
         </div>
         <div>
